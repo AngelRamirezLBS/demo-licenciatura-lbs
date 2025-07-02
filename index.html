@@ -3708,6 +3708,59 @@ var CalificarPregunta1=function(element,ejercicio,pregunta,tipo){
                 }
             }
 
+            function setupPage40Animation() {
+                const page = document.getElementById("page40");
+                if (!page || page.children.length === 0) return;
+
+                const textElements = page.querySelectorAll(".t.text-to-animate");
+                let allSpans = [];
+
+                textElements.forEach(element => {
+                    const spans = splitTextToSpans(element, 'word');
+                    gsapSetOnce(spans, { opacity: 0, y: 165 });
+                    allSpans.push(...spans);
+                });
+
+                if (textElements.length > 0) {
+                    animateOnceOnIntersect(textElements[0], () => {
+                        gsap.to(allSpans, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.7,
+                            ease: "power2.out",
+                            stagger: 0.1,
+                        });
+                    });
+                }
+
+                const image = page.querySelector(".image-to-animate");
+                if (image) {
+                    gsapSetOnce(image, { opacity: 0, y: 165 });
+                    animateOnceOnIntersect(image, target => {
+                        gsap.to(target, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.7,
+                            ease: "power2.out"
+                        });
+                    });
+                }
+
+                const sorJuanaText = page.querySelector("#t8_40");
+                if (sorJuanaText) {
+                    gsapSetOnce(sorJuanaText, { opacity: 0, x: -165 });
+                    animateOnceOnIntersect(sorJuanaText, target => {
+                        gsap.to(target, {
+                            opacity: 1,
+                            x: 0,
+                            duration: 0.7,
+                            ease: "power2.out"
+                        });
+                    });
+                }
+            }
+
+            setupPage5Animations();
             
             // Setup animations for page 7
             setupHeaderFooterAnimation("page7", ".t.header-text", { opacity: 0, x: 75, rotateZ: -45 }, { opacity: 1, x: 0, rotateZ: 0, duration: 0.7, ease: "power2.out", stagger: 0.03 });
@@ -3716,14 +3769,12 @@ var CalificarPregunta1=function(element,ejercicio,pregunta,tipo){
 
             setupPage15Animation();
 
-
-            setupPage5Animations();
-
-
             // Setup animations for page 68
             setupHeaderFooterAnimation("page68", ".t.header-text", { opacity: 0, x: 75, rotateZ: -45 }, { opacity: 1, x: 0, rotateZ: 0, duration: 0.7, ease: "power2.out", stagger: 0.03 });
             setupHeaderFooterAnimation("page68", ".t.footer-text", { opacity: 0, x: 75, rotateZ: -45 }, { opacity: 1, x: 0, rotateZ: 0, duration: 0.7, ease: "power2.out", stagger: 0.03 });
             setupRevealBlurText([document.getElementById("th_68"), document.getElementById("ti_68")]);
+
+            setupPage40Animation();
 
 
 
