@@ -100,9 +100,6 @@ class playerLbs extends componentBase {
     const bar = shadow.querySelector(".bar");
     const thumb = shadow.querySelector(".bar-thumb");
     
-    console.log("Bar encontrada:", bar);
-    console.log("Thumb encontrado:", thumb);
-    
     const getClientX = (e) => {
       if (e.touches && e.touches.length > 0) {
         return e.touches[0].clientX;
@@ -124,8 +121,6 @@ class playerLbs extends componentBase {
       const offsetX = Math.max(0, Math.min(clientX - rect.left, rect.width));
       const percent = offsetX / rect.width;
   
-      console.log("Actualizando posición:", { clientX, offsetX, percent });
-  
       if (this.audio && this.audio.duration && !isNaN(percent)) {
         this.audio.currentTime = percent * this.audio.duration;
         this._updateTimes();
@@ -134,25 +129,19 @@ class playerLbs extends componentBase {
   
     // Click sobre la barra
     bar.addEventListener("click", (e) => {
-      console.log("Click en barra");
       updatePositionFromClientX(getClientX(e));
       const percent = this.audio.currentTime / this.audio.duration;
       const thumbX = percent * (bar.offsetWidth - thumb.offsetWidth);
-      console.log("Click - Percent:", percent, "ThumbX:", thumbX, "Bar width:", bar.offsetWidth, "Thumb width:", thumb.offsetWidth);
       gsap.set(thumb, { x: thumbX });
     });
     
     // Click sobre la barra (touch)
     bar.addEventListener("touchstart", (e) => {
-      console.log("Touch en barra");
       updatePositionFromClientX(getClientX(e));
       const percent = this.audio.currentTime / this.audio.duration;
       const thumbX = percent * (bar.offsetWidth - thumb.offsetWidth);
       gsap.set(thumb, { x: thumbX });
     });
-  
-    // Configurar GSAP Draggable para el thumb (usando el mismo enfoque que dragado_tipo5LBS)
-    console.log("Configurando GSAP Draggable para player");
     
     // Establecer posición inicial del thumb
     const initialPercent = this.audio ? (this.audio.currentTime / this.audio.duration) : 0;
@@ -167,18 +156,14 @@ class playerLbs extends componentBase {
       },
       inertia: false,
       onDragStart: function() {
-        console.log("GSAP Drag start");
         this.isDragging = true;
         thumb.style.cursor = 'grabbing';
       }.bind(this),
       onDrag: function() {
-        console.log("GSAP Drag update");
-        const rect = bar.getBoundingClientRect();
-        const thumbRect = thumb.getBoundingClientRect();
-        const offsetX = thumbRect.left - rect.left + thumbRect.width / 2;
-        const percent = Math.max(0, Math.min(1, offsetX / rect.width));
-        
-        console.log("Posición:", { offsetX, percent, rectWidth: rect.width });
+        // Calcular el porcentaje basado en la posición X del thumb
+        const thumbX = gsap.getProperty(thumb, "x");
+        const maxX = bar.offsetWidth - thumb.offsetWidth;
+        const percent = Math.max(0, Math.min(1, thumbX / maxX));
         
         if (this.audio && this.audio.duration) {
           this.audio.currentTime = percent * this.audio.duration;
@@ -191,23 +176,19 @@ class playerLbs extends componentBase {
         }
       }.bind(this),
       onDragEnd: function() {
-        console.log("GSAP Drag end");
         thumb.style.cursor = 'grab';
         this.isDragging = false;
       }.bind(this)
     })[0];
     
-    console.log("Draggable creado:", draggable);
     
     // Prevenir que el clic en el thumb active el clic de la barra
     thumb.addEventListener("click", (e) => {
-      console.log("Click en thumb");
       e.stopPropagation();
       e.preventDefault();
     });
     
     thumb.addEventListener("touchend", (e) => {
-      console.log("Touch en thumb");
       e.stopPropagation();
       e.preventDefault();
     });
