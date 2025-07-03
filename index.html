@@ -53,6 +53,7 @@
 <script src="components/playerLbs/playerLbs.js"></script>
 <script src="components/timelineLbs/timelineLbs.js"></script>
 <script src="components/sliderLbs/sliderLbs.js"></script>
+<script src="components/VideoPlayerLbs/VideoPlayerLbs.js"></script>
 <!-- <script src="components/dragado_tipo3LBS/dragado_tipo1LBS.js"></script>
 <script src="components/dragado_tipo4LBS/dragado_tipo1LBS.js"></script> -->
 
@@ -3776,6 +3777,24 @@ var CalificarPregunta1=function(element,ejercicio,pregunta,tipo){
             setupRevealBlurText([document.getElementById("th_68"), document.getElementById("ti_68")]);
 
             setupPage40Animation();
+
+            const page = document.querySelector(`#p${data.page}`);
+
+                const playButton = page ? page.querySelector('.play-button') : null;
+
+                if (playButton) {
+                    
+                    const videoPlayer = page.querySelector('video-player-lbs');
+                    console.log(playButton);
+                    console.log(videoPlayer)
+                    if (videoPlayer) {
+                        playButton.addEventListener('click', () => {
+                            console.log("play button click")
+                            videoPlayer.play();
+                        });
+                    }
+                }
+
 
 
 
