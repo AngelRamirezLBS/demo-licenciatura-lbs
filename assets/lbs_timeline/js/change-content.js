@@ -199,7 +199,7 @@ class GeniallyContentManager {
  */
 async function loadContentConfig() {
   try {
-    const response = await fetch('./js/content-config.json');
+    const response = await fetch('./js/content-config.json?nocache=' + Date.now(), { cache: 'no-store' });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -227,9 +227,10 @@ async function loadContentConfig() {
 /**
  * Aplica todos los cambios de contenido
  */
-(async () => {
+const initChangeContent = async () => {
   try {
-    const config = await loadContentConfig();
+    const config = window.contentConfig;
+    console.log(config)
     const manager = new GeniallyContentManager();
     const results = manager.applyChanges(config);
 
@@ -243,6 +244,8 @@ async function loadContentConfig() {
     console.error('❌ Error al aplicar cambios:', error);
     return [];
   }
-})();
+};
+
+initChangeContent();
 
 
