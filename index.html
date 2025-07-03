@@ -3780,27 +3780,14 @@ var CalificarPregunta1=function(element,ejercicio,pregunta,tipo){
 
             const page = document.querySelector(`#p${data.page}`);
 
-                const playButton = page ? page.querySelector('.play-button') : null;
+            const playButton = page ? page.querySelector('.play-button') : null;
 
-                if (playButton) {
-                    
-                    const videoPlayer = page.querySelector('video-player-lbs');
-                    console.log(playButton);
-                    console.log(videoPlayer)
-                    if (videoPlayer) {
-                        playButton.addEventListener('click', () => {
-                            console.log("play button click")
-                            videoPlayer.play();
-                        });
-                    }
-                }
+            const videoPlayer = playButton ? page.querySelector('video-player-lbs') : null;
+            
+            if (videoPlayer) 
+                playButton.addEventListener('click', () => videoPlayer.play() );
 
-
-
-
-              //console.log(data)
-             //console.log(Paginascroll);
-            //dibujarNota();
+            
 			Visor.cargarSeparador(data.page);
            // loadDynamicNote(data.page);
 	
