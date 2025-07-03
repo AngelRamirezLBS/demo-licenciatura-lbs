@@ -14,7 +14,7 @@ class timelineLbs extends HTMLElement {
 				width: 100%;
 				height: 100%;
 				position: relative;
-				background: #380a66;
+				background: #222;
 				box-sizing: border-box;
 			}
 
@@ -23,7 +23,7 @@ class timelineLbs extends HTMLElement {
 				height: 100%;
 				position: relative;
 				overflow: visible;
-				background: #380a66;
+				background: #222;
 				display: flex;
 				justify-content: center;
 				align-items: center;
@@ -37,13 +37,13 @@ class timelineLbs extends HTMLElement {
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				background: #380a66;
+				background: #222;
 				box-sizing: border-box;
 			}
 
 			iframe {
 				border: none;
-				background: #380a66;
+				background: #222;
 				width: 100%;
 				height: 100%;
 				display: block;
@@ -146,7 +146,7 @@ class timelineLbs extends HTMLElement {
 		if (this._asset) {
 			this._iframe = document.createElement('iframe');
 			this._iframe.style.border = 'none';
-			this._iframe.style.background = '#380a66';
+			this._iframe.style.background = '#222';
 			this._iframe.src = this._asset;
 
 			// Agregar evento de carga para manejar la transición y los estilos
