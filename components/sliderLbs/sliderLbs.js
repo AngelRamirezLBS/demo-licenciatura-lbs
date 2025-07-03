@@ -266,39 +266,11 @@ class sliderLbs extends componentBase {
         }
 
       `;
-      const linkSwiperCss = document.createElement("link");
-      linkSwiperCss.setAttribute("rel", "stylesheet");
-      linkSwiperCss.setAttribute("href", "assets/package/swiper-bundle.min.css");
-
-
-      const scriptSwiperBundle = document.createElement("script");
-      scriptSwiperBundle.setAttribute("src", "assets/package/swiper-bundle.min.js");4
-
-      const expoSwiperCss = document.createElement("link");
-      expoSwiperCss.setAttribute("rel", "stylesheet");
-      expoSwiperCss.setAttribute("href", "assets/effect-expo.min.css");
-
-      const expoSwiperBundle = document.createElement("script");
-      expoSwiperBundle.setAttribute("src", "assets/effect-expo.min.js");
-
-      const scriptSwiperElement = document.createElement("script");
-      scriptSwiperElement.setAttribute("src", "assets/package/swiper-element-bundle.min.js");
-
-      shadow.insertBefore(linkSwiperCss, shadow.firstChild);
-      shadow.insertBefore(scriptSwiperBundle, shadow.firstChild);
-      // shadow.insertBefore(expoSwiperCss, shadow.firstChild);
-      // shadow.insertBefore(expoSwiperBundle, shadow.firstChild);
-      shadow.insertBefore(scriptSwiperElement, shadow.firstChild);
 
       this._id = elem.getAttribute("id");
       this._pagina = elem.getAttribute("pagina");
       this._ejercicio = elem.getAttribute("ejercicio");
       this._isFullscreen = elem.getAttribute("fullscreen");
-
-        // this._isFullscreen = "true";
-      
-      // elem.style.cssText += 'display: inline-table';
-      // elem.style.cssText += 'position: relative';
 
       this.observers();
       this.loadData();
@@ -425,39 +397,6 @@ class sliderLbs extends componentBase {
         },
         speed: 400,
         watchSlidesProgress: true,
-        /*
-        modules: [EffectExpo],
-        // effect: "coverflow",
-        shuttersEffect: { split: 8 },
-        speed: 900,
-        injectStyles: [`
-        .swiper-pagination-bullet {
-          width: 30px;
-          height: 30px;
-          text-align: center;
-          line-height: 30px;
-          font-size: 20px;
-          color: #000;
-          opacity: 1;
-          background: rgba(82, 82, 82, 0.3);
-        }
-
-        .swiper-pagination-bullet-active {
-            color: #000;
-            background: #000;
-        }
-        `],
-        pagination: {
-          clickable: true,
-          renderBullet: function (index, className) {
-            return '<span class="' + className + '">' + (index + 1) + "</span>";
-          },
-        },
-        parallax: { enabled: true },
-        a11y: { enabled: false },
-        watchSlidesProgress: true,
-        slidesPerGroupAuto: false,
-        */
       });
       
       swiperCont.initialize();
@@ -477,12 +416,7 @@ class sliderLbs extends componentBase {
     this.modal.style.display = 'flex';
     this.modal.style.animationName = "animatetop";
     this.modal.style.webkitAnimationName = "animatetop"; 
-
-    // this.iframe.classList.add('visible');
-    // this.iframe.classList.remove('hidden');
     this.closeBtn.style.display = 'block';
-
-
   }
   
   loadData(){
