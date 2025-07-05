@@ -3584,30 +3584,6 @@ var CalificarPregunta1=function(element,ejercicio,pregunta,tipo){
                 observer.observe(target);
             }
 
-            function setupPage5Animations() {
-                const page = document.getElementById("page5");
-                if (!page || page.children.length === 0) return;
-
-                const textElements = page.querySelectorAll(".t");
-                textElements.forEach(element => {
-                    if (element.dataset.animated === 'true') return;
-
-                    const spans = element.querySelectorAll("span");
-                    gsapSetOnce(spans, { opacity: 0, y: 165 });
-
-                    animateOnceOnIntersect(element, () => {
-                        gsap.to(spans, {
-                            opacity: 1,
-                            y: 0,
-                            duration: 1,
-                            ease: "power2.out",
-                            stagger: 0.1,
-                        });
-                        spans.forEach(span => span.dataset.animated = 'true');
-                    });
-                });
-            }
-
             function setupHeaderFooterAnimation(pageId, selector, initial, config) {
                 const page = document.getElementById(pageId);
                 if (!page || page.children.length === 0) return;
@@ -3771,7 +3747,6 @@ var CalificarPregunta1=function(element,ejercicio,pregunta,tipo){
                 }
             }
 
-            setupPage5Animations();
             
             // Setup animations for page 7
             setupHeaderFooterAnimation("page7", ".t.header-text", { opacity: 0, x: 75, rotateZ: -45 }, { opacity: 1, x: 0, rotateZ: 0, duration: 0.7, ease: "power2.out", stagger: 0.03 });
