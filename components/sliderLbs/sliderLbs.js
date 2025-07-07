@@ -271,6 +271,7 @@ class sliderLbs extends componentBase {
       this._pagina = elem.getAttribute("pagina");
       this._ejercicio = elem.getAttribute("ejercicio");
       this._isFullscreen = elem.getAttribute("fullscreen");
+      this._file = elem.getAttribute("file");
 
       this.observers();
       this.loadData();
@@ -321,6 +322,11 @@ class sliderLbs extends componentBase {
         console.log('5 - insertDataSlider despues');
         const swiperCont = this.shadowRoot.querySelector("swiper-container");
 
+        let iFrame = this.shadowRoot.querySelector(".iframe");
+        console.log(iFrame);
+
+        iFrame.setAttribute("src", `./assets/gamma-page/${this._file}/index.html`);
+
         for(let i = 0; i < data[0].titulos.length; i++){
           
           var swiperSlide = document.createElement("swiper-slide");
@@ -328,7 +334,7 @@ class sliderLbs extends componentBase {
           div.setAttribute("class", "swiper-slide-content");
           var img = document.createElement("img");
           img.setAttribute("class", "swiper-slide-bg-image");
-          img.setAttribute("src", `./assets/gamma-page/imagenes/foto${i+1}.png`);
+          img.setAttribute("src", `./assets/gamma-page/${this._file}/imagenesSlide/foto${i+1}.png`);
           var clickVideo = document.createElement("img");
           clickVideo.muted = true
           clickVideo.setAttribute("class", "video-click");
