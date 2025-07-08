@@ -19,8 +19,13 @@ class sliderLbs extends componentBase {
           this.shadowRoot.innerHTML = txt;
 
           // this.iframe = this.shadowRoot.getElementById('iframe');
-          this.modal = this.shadowRoot.getElementById('iframeModal');
-          this.closeBtn = this.shadowRoot.getElementById('closeModalBtn');
+          
+          this.modal = document.getElementById('iframeModal');
+          this.closeBtn = document.getElementById('closeModalBtn');
+
+          console.log(" - AQUI - AQUI - AQUI - AQUI - AQUI - AQUI - AQUI - AQUI - ");
+          console.log(this.modal);
+          console.log(this.closeBtn);
 
           this.shadowRoot.querySelector("swiper-container").addEventListener("click", (event) => {
             const clickedSlide = event.target.closest('.swiper-slide-active');
@@ -41,6 +46,10 @@ class sliderLbs extends componentBase {
               this.closeBtn.style.display = 'none';
               if(!this._isMobile) Visor.botonesHandlerWeb('show');
             }, 300);
+            
+            let iFrame = document.querySelector(".slider-iframe");
+
+            iFrame.setAttribute("src", "");
           });
 
           // this.shadowRoot.querySelector(".close").addEventListener('click', this._hideModal.bind(this));
@@ -322,11 +331,6 @@ class sliderLbs extends componentBase {
         console.log('5 - insertDataSlider despues');
         const swiperCont = this.shadowRoot.querySelector("swiper-container");
 
-        let iFrame = this.shadowRoot.querySelector(".iframe");
-        console.log(iFrame);
-
-        iFrame.setAttribute("src", `./assets/gamma-page/${this._file}/index.html`);
-
         for(let i = 0; i < data[0].titulos.length; i++){
           
           var swiperSlide = document.createElement("swiper-slide");
@@ -419,6 +423,11 @@ class sliderLbs extends componentBase {
   }
 
   slideTouched(elem) {
+    
+    let iFrame = document.querySelector(".slider-iframe");
+
+    iFrame.setAttribute("src", `./assets/gamma-page/${this._file}/index.html`);
+
     this.modal.style.display = 'flex';
     this.modal.style.animationName = "animatetop";
     this.modal.style.webkitAnimationName = "animatetop"; 

@@ -4800,6 +4800,52 @@ var CalificarPregunta1=function(element,ejercicio,pregunta,tipo){
     @font-face {
         font-family: 'Volte-Regular';
     }
+
+    /* Slider */
+    
+/* Modal */
+.slider-iframe-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+    /* -webkit-animation-name: animatetop; */
+    -webkit-animation-duration: 0.4s;
+    /* animation-name: animatetop; */
+    animation-duration: 0.4s;
+}
+
+.slider-iframe-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.slider-close-modal-button {
+    position: absolute;
+    top: 10px; right: 10px;
+    z-index: 1000;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px; height: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.slider-iframe {
+    width: 100%; 
+    height: 100%;
+    border: none;
+}
+    
 </style>
 </head>
 <body class="light-theme">
@@ -4927,6 +4973,13 @@ var CalificarPregunta1=function(element,ejercicio,pregunta,tipo){
     <panel-proyecto-lbs id="panelProyecto-lbs" class="animacion" style="display: none;"></panel-proyecto-lbs>
 	<toast-lbs id="toast-lbs-msg" class="animacion"></toast-lbs>
     <nota-v2-lbs id="notav2lbs" class="animacion" style="display: none;"></nota-v2-lbs>
+    <!-- Slider iframe modal -->
+    <div id="iframeModal" class="slider-iframe-modal">
+        <div class="slider-iframe-container">
+            <button id="closeModalBtn" class="slider-close-modal-button">✕</button>
+            <iframe class="slider-iframe"></iframe>
+        </div>
+    </div>
 	<!-- Panel secuencia didactica -->
 	<!-- <button id="btnPanelProfesor" onclick="Visor.openFooter()" title="Zoom In" class="float"><i id="iconoPanelProfesor" style="transition: transform 0.3s" class="fa fa-angle-up fa-lg" aria-hidden="true"></i></button>
     <div id="panelFooter"  class="footer" style="background: #5b25ff;border-radius: 44px 44px 0 0;">
