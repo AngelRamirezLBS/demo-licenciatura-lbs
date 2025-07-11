@@ -92,17 +92,17 @@ class timelineLbs extends HTMLElement {
 		this.shadowRoot.appendChild(this.outerContainer);
 
 		// Intersection Observer
-		this.observer = new IntersectionObserver((entries) => {
-			entries.forEach(entry => {
-				if (entry.isIntersecting) {
+		// this.observer = new IntersectionObserver((entries) => {
+			// entries.forEach(entry => {
+				// if (entry.isIntersecting) {
 					this._isVisible = true;
 					this.loadIframe();
-					this.observer.disconnect();
-				}
-			});
-		}, {
-			threshold: 0.001
-		});
+					// this.observer.disconnect();
+				// }
+			// });
+		// }, {
+			// threshold: 0.001
+		// });
 	}
 
 	get asset() {
