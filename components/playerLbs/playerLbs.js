@@ -239,10 +239,17 @@ class playerLbs extends componentBase {
 
   _updatePauseIcon() {
     const pauseBtn = this.shadowRoot.querySelector(".pause");
+    const pauseSvg = pauseBtn.querySelector("svg:first-child");
+    const playSvg = pauseBtn.querySelector("svg:last-child");
+    
     if (this.isPlaying) {
-      pauseBtn.textContent = "⏸"; // Unicode for pause
+      // Mostrar icono de pausa, ocultar icono de play
+      if (pauseSvg) pauseSvg.style.display = "block";
+      if (playSvg) playSvg.style.display = "none";
     } else {
-      pauseBtn.textContent = "▶"; // Unicode for play
+      // Mostrar icono de play, ocultar icono de pausa
+      if (pauseSvg) pauseSvg.style.display = "none";
+      if (playSvg) playSvg.style.display = "block";
     }
   }
 
