@@ -23,9 +23,9 @@ class sliderLbs extends componentBase {
           this.modal = document.getElementById('iframeModal');
           this.closeBtn = document.getElementById('closeModalBtn');
 
-          console.log(" - AQUI - AQUI - AQUI - AQUI - AQUI - AQUI - AQUI - AQUI - ");
-          console.log(this.modal);
-          console.log(this.closeBtn);
+          // console.log(" - AQUI - AQUI - AQUI - AQUI - AQUI - AQUI - AQUI - AQUI - ");
+          // console.log(this.modal);
+          // console.log(this.closeBtn);
 
           this.shadowRoot.querySelector("swiper-container").addEventListener("click", (event) => {
             const clickedSlide = event.target.closest('.swiper-slide-active');
@@ -287,10 +287,10 @@ class sliderLbs extends componentBase {
   }
 
   _sliderData(){
-      console.log('3 - sliderData');
+      // console.log('3 - sliderData');
       return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
-        console.log('4 - sliderData despues?');
+        // console.log('4 - sliderData despues?');
         xhr.open('GET', `assets/slides${this._ejercicio}.json`, true);
         xhr.responseType = 'json';
         
@@ -325,11 +325,13 @@ class sliderLbs extends componentBase {
 
   _insertDataSlider(){
     return new Promise(resolve => {
-      console.log('2 - insertDataSlider');
+      // console.log('2 - insertDataSlider');
       this._sliderData()
       .then((data) => {
-        console.log('5 - insertDataSlider despues');
+        // console.log('5 - insertDataSlider despues');
         const swiperCont = this.shadowRoot.querySelector("swiper-container");
+        
+        var DateTime= new Date().getTime();
 
         for(let i = 0; i < data[0].titulos.length; i++){
           
@@ -338,16 +340,16 @@ class sliderLbs extends componentBase {
           div.setAttribute("class", "swiper-slide-content");
           var img = document.createElement("img");
           img.setAttribute("class", "swiper-slide-bg-image");
-          img.setAttribute("src", `./assets/gamma-page/${this._file}/imagenesSlide/foto${i+1}.png`);
-          var clickVideo = document.createElement("img");
-          clickVideo.muted = true
-          clickVideo.setAttribute("class", "video-click");
-          clickVideo.setAttribute("src", `assets/img/animation2.gif`);
+          img.setAttribute("src", `./assets/gamma-page/${this._file}/imagenesSlide/foto${i+1}.jpg?t="${DateTime}`);
+          // var clickVideo = document.createElement("img");
+          // clickVideo.muted = true
+          // clickVideo.setAttribute("class", "video-click");
+          // clickVideo.setAttribute("src", `assets/img/animation2.gif`);
           
           swiperCont.appendChild(swiperSlide);
           swiperCont.children[i].appendChild(img);
           swiperCont.children[i].appendChild(div);
-          swiperCont.children[i].appendChild(clickVideo);
+          // swiperCont.children[i].appendChild(clickVideo);
 
           // var title = document.createElement("div");
           // title.innerText = data[0].titulos[i];
@@ -387,26 +389,36 @@ class sliderLbs extends componentBase {
   }
 
   async _logicData(elem) {
-    console.log('1 - logicData');
+    // console.log('1 - logicData');
     this._insertDataSlider()
     .then((swiperCont) => {
-      console.log('6 - logicData despues');
+      // console.log('6 - logicData despues');
       var swiper = new Swiper("swiper-container");
       Object.assign(swiperCont, {
-        slidesPerView: "auto",
         centeredSlides: true,
-        grabCursor: true,
+        // grabCursor: true,
         loop: true,
-        effect: "coverflow",
-        coverflowEffect: {
-          depth: 500,
-          rotate: 20,
-          scale: 1.25,
-          stretch: 80,
-          modifier: 2,
-        },
-        speed: 400,
-        watchSlidesProgress: true,
+        slidesPerView: 1.1,
+        spaceBetween: 9,
+        effect: "slide",
+        pagination: { dynamicBullets: true },
+        injectStyles: [`
+        .swiper-pagination-bullet {
+          width: 30px;
+          height: 30px;
+          text-align: center;
+          line-height: 30px;
+          font-size: 20px;
+          color: #000;
+          opacity: 1;
+          background: rgba(229,111,31, 0.3);
+        }
+  
+        .swiper-pagination-bullet-active {
+          color: #fff;
+          background: #e56f1f;
+        }
+        `],
       });
       
       swiperCont.initialize();
